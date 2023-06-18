@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Loader\ArrayLoader;
 
 class VisitController
 {
@@ -14,7 +15,14 @@ class VisitController
 
     #[Route('/visits')]
     public function visits (): Response {
-        return new Response('This is the visits page');
+
+
+        $loader = new ArrayLoader([
+            'index' => 'Hello {{ name }}!',
+        ]);
+        $twig = new \Twig\Environment($loader);
+        return new Response($twig->render('index', ['name' => 'Fabien']));
+
     }
 
     #[Route('/contacts/{slug}')]
