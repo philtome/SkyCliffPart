@@ -26,8 +26,8 @@ class VisitController extends AbstractController
         return new Response($twig->render('visits.twig', ['name' => 'Mr Tome']));
 
     }
-
-    #[Route('/contacts/{slug}')]
+    // note I need to figure out below: name and methods
+    #[Route('/contacts/{slug}', name:'contacts', defaults: ['slug' => null], methods: ['GET', 'HEAD'])]
     public function contacts ($slug): Response {
         return new Response('This is the contacts plus slugs page, slug: '.$slug);
     }
