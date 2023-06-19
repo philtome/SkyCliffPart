@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Loader\ArrayLoader;
+use Twig\Loader\FilesystemLoader;
 
-class VisitController
+class VisitController extends AbstractController
 {
     #[Route('/')]
     public function homepage () {
@@ -17,11 +19,12 @@ class VisitController
     public function visits (): Response {
 
 
-        $loader = new ArrayLoader([
-            'index' => 'Hello {{ name }}!',
-        ]);
+//        $loader = new ArrayLoader([
+//            'index' => 'Hello {{ name }}!',
+//        ]);
+        $loader = new FilesystemLoader('views');
         $twig = new \Twig\Environment($loader);
-        return new Response($twig->render('index', ['name' => 'Fabien']));
+        return new Response($twig->render('visits.twig', ['name' => 'Mr Tome']));
 
     }
 
