@@ -1,15 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <header class="page-header header container-fluid">
-        <div class="overlay"></div>
-        <div class="description">
-            <h1>Welcome to the Landing Page!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis. Suspendisse consectetur mi id libero fringilla, in pharetra sem ullamcorper.</p>
 
-            <button class="btn btn-outline-secondary btn-lg">Tell Me More!</button>
+{% block body %}
+    {{ dump() }}
+    <div class="jumbotron">
+        <div class="container">
+            <h1><?php echo strtoupper(strtolower($cleverWelcomeMessage)); ?></h1>
+
+            <p>Over <?php echo $visitCount ?> visit records!</p>
         </div>
-    </header>
-Hello {{ name }}!  this works
-    It should
+    </div>
+    <!--<form method="post">-->
+    <table style="width:75%">
+        <tr>
+            <th>Visit Date</th>
+            <th>Visit Time</th>
+            <th>Type</th>
+            <th>Notes</th>
+        </tr>
+        <?php foreach ($visits as $visit) { ?>
+        <?php $visitId = $visit['id']; ?>
+        <tr>
+            <td><?php echo $visit['visit_date'] ?>
+            </td>
+            <td><?php echo $visit['visit_time'] ?>
+            </td>
+            <td>
+                <a href="/show.php?id=<?php echo $visitId; ?>">
+                    <?php echo $visit['type']; ?>
+                </a>
+            </td>
+            <td><?php echo $visit['notes'] ?>
+            </td>
+            <td class="visit-delete">
+                <form action='/visit_display.php?id="<?php echo $visitId; ?>" ' method="post">
+                    <input type="hidden" name="id" value="<?php echo $visitId; ?>">
+                    <input type="submit" name="submit" value="Delete">
+                </form>
+
+                <!--                <input type="submit" name="--><?php //echo $visit['id'] ?><!--" class="button" value="Delete">-->
+            </td>
+            <td class="visit-modify">
+                <form action='/visits_edit.php?id=<?php echo $visitId; ?> ' method="post">
+                    <input type="hidden" name="id" value=<?php echo $visitId; ?>>
+                    <input type="submit" name="submit" value="Edit">
+                </form>
+            </td>
+        </tr>
+        <?php } ?>
+
+    </table>
+
 {% endblock %}

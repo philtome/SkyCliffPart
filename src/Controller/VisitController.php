@@ -17,7 +17,33 @@ class VisitController extends AbstractController
     #[Route('/visits')]
     public function visits (): Response
     {
-        return $this->render('visits\visits.twig', ['name' => 'Mr Tome 2 u']);
+        require '../lib/functions.php';
+
+        $visits = get_visits(10);
+
+        $visits = array_reverse($visits);
+
+        $cleverWelcomeMessage = 'Your Health History';
+        $visitCount = count($visits);
+
+
+        if(array_key_exists('id', $_POST)) {
+            $id = $_POST['id'];
+            deletebutton($id);
+        }
+
+        function deletebutton($id) {
+            delete_visit($id);
+            //return = "This is Button1 that is selected";
+            header('Location: /visit_display.php');
+            die;
+        }
+
+
+
+
+
+        return $this->render('visits\visits.twig', ['array("visits" => $visits',]);
     }
 
     #[Route('/contacts')]
