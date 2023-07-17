@@ -11,24 +11,29 @@ class VisitController extends AbstractController
 {
     #[Route('/')]
     public function homepage () {
-        return new Response('this is home');
+        return $this->render('main\home.twig', ['userName' => 'Philip Tome']);
     }
 
     #[Route('/visits')]
-    public function visits (): Response {
-
-
-//        $loader = new ArrayLoader([
-//            'index' => 'Hello {{ name }}!',
-//        ]);
-        $loader = new FilesystemLoader('views');
-        $twig = new \Twig\Environment($loader);
-        return new Response($twig->render('visits.twig', ['name' => 'Mr Tome']));
-
+    public function visits (): Response
+    {
+        return $this->render('visits\visits.twig', ['name' => 'Mr Tome 2 u']);
     }
+
+    #[Route('/contacts')]
+    public function contacts (): Response {
+            return $this->render('contacts\contacts.twig', ['name' => 'Mr Tome 2 u']);
+    }
+
+    #[Route('/about')]
+    public function about (): Response {
+        return $this->render('contacts\about.twig', ['name' => 'Mr Tome 2 u']);
+    }
+
     // note I need to figure out below: name and methods
-    #[Route('/contacts/{slug}', name:'contacts', defaults: ['slug' => null], methods: ['GET', 'HEAD'])]
-    public function contacts ($slug): Response {
-        return new Response('This is the contacts plus slugs page, slug: '.$slug);
+    #[Route('/individualContact/{slug}', name:'contacts.twig', defaults: ['slug' => null], methods: ['GET', 'HEAD'])]
+    public function individualContact ($slug): Response {
+        return new Response('This is the Individual Contacts plus slugs page, slug: '.$slug);
     }
+
 }
