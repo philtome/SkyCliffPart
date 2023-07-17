@@ -43,7 +43,7 @@ class VisitController extends AbstractController
 
 
 
-        return $this->render('visits\visits.twig', ['array("visits" => $visits',]);
+        return $this->render('visits\visits.twig', ['visits' => $visits]);
     }
 
     #[Route('/contacts')]
