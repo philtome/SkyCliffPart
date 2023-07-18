@@ -4,7 +4,7 @@ body {
     background: #f2f6e9;
 }
 .navbar {
-    background:#6ab446;
+    background:#a98c86;
 }
 .nav-link,
 .navbar-brand {
@@ -21,7 +21,7 @@ body {
     justify-content: flex-end;
 }
 .header {
-    background-image: url('images/header-backgroundbk.jpg');
+    background-image: url('images/pastel-grey-solid-color.jpg');
     background-size: cover;
     background-position: center;
     position: relative;

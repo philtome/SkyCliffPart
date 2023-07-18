@@ -14,7 +14,7 @@ class VisitController extends AbstractController
         return $this->render('main\home.twig', ['userName' => 'Philip Tome']);
     }
 
-    #[Route('/visits')]
+    #[Route('/careplans')]
     public function visits (): Response
     {
         require '../lib/functions.php';
@@ -46,7 +46,7 @@ class VisitController extends AbstractController
         return $this->render('visits\visits.twig', ['visits' => $visits]);
     }
 
-    #[Route('/contacts')]
+    #[Route('/partcipans')]
     public function contacts (): Response {
             return $this->render('contacts\contacts.twig', ['name' => 'Mr Tome 2 u']);
     }
