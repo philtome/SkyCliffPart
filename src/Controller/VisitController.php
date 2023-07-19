@@ -19,12 +19,12 @@ class VisitController extends AbstractController
     {
         require '../lib/functions.php';
 
-        $visits = get_visits(10);
+        $carePlans = get_careplans(10);
 
-        $visits = array_reverse($visits);
+        $carePlans = array_reverse($carePlans);
 
-        $cleverWelcomeMessage = 'Your Health History';
-        $visitCount = count($visits);
+        $cleverWelcomeMessage = 'Care Plan List';
+        $visitCount = count($carePlans);
 
 
         if(array_key_exists('id', $_POST)) {
@@ -33,7 +33,7 @@ class VisitController extends AbstractController
         }
 
         function deletebutton($id) {
-            delete_visit($id);
+            delete_careplan($id);
             //return = "This is Button1 that is selected";
             header('Location: /visit_display.php');
             die;
@@ -43,7 +43,7 @@ class VisitController extends AbstractController
 
 
 
-        return $this->render('visits\visits.twig', ['visits' => $visits]);
+        return $this->render('careplans\careplans.twig', ['careplans' => $carePlans]);
     }
 
     #[Route('/partcipans')]

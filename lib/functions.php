@@ -26,7 +26,7 @@ function get_careplans($limit = null) {
         $stmt->bindParam('resultLimit', $limit, PDO::PARAM_INT); //added this line new
     }
     $stmt->execute();  //added this line new
-    $care_plans = $stmt->fetchAll();
+    $carePlans = $stmt->fetchAll();
 
     return $carePlans;
 }
