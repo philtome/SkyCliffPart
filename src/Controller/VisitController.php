@@ -15,7 +15,7 @@ class VisitController extends AbstractController
     }
 
     #[Route('/careplans')]
-    public function visits (): Response
+    public function careplans (): Response
     {
         require '../lib/functions.php';
 
@@ -38,11 +38,6 @@ class VisitController extends AbstractController
             header('Location: /visit_display.php');
             die;
         }
-
-
-
-
-
         return $this->render('careplans\careplans.twig', ['careplans' => $carePlans]);
     }
 
