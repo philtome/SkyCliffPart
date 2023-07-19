@@ -6,54 +6,54 @@ require 'functions.php';
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
-    if (isset($_POST['visitDate'])) {
-        $visitDate = $_POST['visitDate'];
+    if (isset($_POST['carePlanDate'])) {
+        $carePlanDate = $_POST['carePlanDate'];
     } else {
-        $visitDate = '';
+        $carePlanDate = '';
     }
 
-    if (isset($_POST['visitTime'])) {
-        $visitTime = $_POST['visitTime'];
+    if (isset($_POST['carePlanTime'])) {
+        $carePlanTime = $_POST['carePlanTime'];
     } else {
-        $visitTime = '';
+        $carePlanTime = '';
     }
 
-    if (isset($_POST['visitType'])) {
-        $visitType = $_POST['visitType'];
+    if (isset($_POST['carePlanType'])) {
+        $carePlanType = $_POST['carePlanType'];
     } else {
-        $visitType = '';
+        $carePlanType = '';
     }
 
-    if (isset($_POST['visitWith'])) {
-        $visitWith = $_POST['visitWith'];
+    if (isset($_POST['carePlanWith'])) {
+        $carePlanWith = $_POST['carePlanWith'];
     } else {
-        $visitWith = '';
+        $carePlanWith = '';
     }
 
-    if (isset($_POST['visitNotes'])) {
-        $visitNotes = $_POST['visitNotes'];
+    if (isset($_POST['carePlanNotes'])) {
+        $carePlanNotes = $_POST['carePlanNotes'];
     } else {
-        $visitNotes= '';
+        $carePlanNotes= '';
     }
 
-    if(isset($_POST['visitId'])) {
-        $visitId = $_POST['visitId'];
+    if(isset($_POST['carePlanId'])) {
+        $carePlanId = $_POST['carePlanId'];
     }
 
     //$pets = get_pets();
-    $newVisit = array(
-            'visitDate' => $visitDate,
-            'visitTime' => $visitTime,
-            'visitType' => $visitType,
-            'visitWith' => $visitWith,
-            'visitNotes' => $visitNotes,
+    $newCarePlan = array(
+            'carePlanDate' => $carePlanDate,
+            'carePlanTime' => $carePlanTime,
+            'carePlanType' => $carePlanType,
+            'carePlanWith' => $carePlanWith,
+            'carePlanNotes' => $carePlanNotes,
         );
     //$pets[] = $newPet;
-    if ($visitId == null) {
-        $successful = save_visits($newVisit);
+    if ($carePlanId == null) {
+        $successful = save_careplans($newCarePlan);
     }
     else {
-        $successful = update_visit($newVisit, $visitId);
+        $successful = update_careplans($newCarePlan, $carePlanId);
     }
     //$json = json_encode($pets, JSON_PRETTY_PRINT);
     //file_put_contents('data/pets.json', $json);

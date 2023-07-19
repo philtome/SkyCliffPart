@@ -13,11 +13,11 @@ function get_connection() {
     return $pdo;
 }
 
-function get_visits($limit = null) {
+function get_careplans($limit = null) {
 
     $pdo = get_connection();
 
-    $query = 'SELECT * FROM visits';
+    $query = 'SELECT * FROM care_plans';
     if ($limit) {
         $query = $query.' LIMIT :resultLimit';
     }
@@ -26,9 +26,9 @@ function get_visits($limit = null) {
         $stmt->bindParam('resultLimit', $limit, PDO::PARAM_INT); //added this line new
     }
     $stmt->execute();  //added this line new
-    $visits = $stmt->fetchAll();
+    $care_plans = $stmt->fetchAll();
 
-    return $visits;
+    return $carePlans;
 }
 
 function get_contacts($limit = null) {
@@ -49,11 +49,11 @@ function get_contacts($limit = null) {
     return $contacts;
 }
 
-function get_visit($id) {
+function get_careplan($id) {
 
     $pdo = get_connection();
 
-    $query = 'SELECT * FROM visits WHERE id = :idVal';
+    $query = 'SELECT * FROM care_plans WHERE id = :idVal';
     $stmt = $pdo->prepare($query);
     $stmt->bindParam('idVal', $id);
     $stmt->execute();
@@ -70,22 +70,22 @@ function get_contact($id) {
     return $stmt->fetch();
 }
 
-function save_visits ($visitToSave) {
+function save_careplans ($carePlanToSave) {
     $pdo = get_connection();
 
-    $visitDate = $visitToSave['visitDate'];
-    $visitTime = $visitToSave['visitTime'];
-    $visitType = $visitToSave['visitType'];
-    $visitWith = $visitToSave['visitWith'];
-    $visitNotes = $visitToSave['visitNotes'];
+    $carePlanDate = $carePlanToSave['carePlanDate'];
+    $carePlanTime = $carePlanToSave['carePlanTime'];
+    $carePlanType = $carePlanToSave['carePlanType'];
+    $carePlanWith = $carePlanToSave['carePlanWith'];
+    $carePlanNotes = $carePlanToSave['carePlanNotes'];
 
-    $query = 'INSERT INTO visits (visit_date, visit_time, type, visit_with, notes) VALUES (?,?,?,?,?)';
+    $query = 'INSERT INTO care_plans (visit_date, visit_time, type, visit_with, notes) VALUES (?,?,?,?,?)';
     //$query = 'INSERT INTO visits (name, breed, weight, bio, image) VALUES ("namer", "breader", 99, "", "", "");'
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$visitDate, $visitTime, $visitType,$visitWith,$visitNotes]);
+    $stmt->execute([$carePlanDate, $carePlanTime, $carePlanType,$carePlanWith,$carePlanNotes]);
     //$stmt = $pdo->prepare($query);
     //$stmt->execute();
-    return $visitType." added";
+    return $carePlanType." added";
 }
 
 function save_contact ($contactToSave) {
@@ -106,22 +106,22 @@ function save_contact ($contactToSave) {
     //$stmt->execute();
     return $contactCompany." added";
 }
-function update_visit($visitToSave, $id) {
+function update_careplans($carePlanToSave, $id) {
     $pdo = get_connection();
 
-    $visitDate = $visitToSave['visitDate'];
-    $visitTime = $visitToSave['visitTime'];
-    $visitType = $visitToSave['visitType'];
-    $visitWith = $visitToSave['visitWith'];
-    $visitNotes = $visitToSave['visitNotes'];
+    $carePlanDate = $carePlanToSave['carePlanDate'];
+    $carePlanTime = $carePlanToSave['carePlanTime'];
+    $carePlanType = $carePlanToSave['carePlanType'];
+    $carePlanWith = $carePlanToSave['carePlanWith'];
+    $carePlanNotes = $carePlanToSave['carePlanNotes'];
 
-    $query = 'UPDATE visits SET visit_date = ?, visit_time =?, type = ?, visit_with = ?, notes = ? WHERE id = ?';
+    $query = 'UPDATE care_plans SET visit_date = ?, visit_time =?, type = ?, visit_with = ?, notes = ? WHERE id = ?';
     //$query = 'INSERT INTO visits (name, breed, weight, bio, image) VALUES ("namer", "breader", 99, "", "", "");'
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$visitDate, $visitTime, $visitType,$visitWith,$visitNotes,$id]);
+    $stmt->execute([$carePlanDate, $carePlanTime, $carePlanType,$carePlanWith,$carePlanNotes,$id]);
     //$stmt = $pdo->prepare($query);
     //$stmt->execute();
-    return $visitType." updated";
+    return $carePlanType." updated";
 }
 function update_contact ($contactToSave,$id) {
     $pdo = get_connection();
@@ -142,10 +142,10 @@ function update_contact ($contactToSave,$id) {
     return $contactCompany." updated";
 }
 
-function delete_visit($id) {
+function delete_careplan($id) {
     $pdo = get_connection();
 
-    $query = 'DELETE FROM visits WHERE id = ?';
+    $query = 'DELETE FROM care_plans WHERE id = ?';
     $stmt = $pdo->prepare($query);
     $stmt->execute([$id]);
 }
