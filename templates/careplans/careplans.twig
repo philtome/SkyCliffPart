@@ -23,29 +23,29 @@
             <th>Type</th>
             <th>Notes</th>
         </tr>
-        {% for visit in visits %}
+        {% for careplan in careplans %}
         <tr>
-            <td>{{ visit.visit_date }}
+            <td>{{ careplan.visit_date }}
             </td>
-            <td>{{ visit.visit_time }}
+            <td>{{ careplan.visit_time }}
             </td>
             <td>
-                <a href="/show.php?id={{ visit.id }}">
-                    {{ visit.type}}
+                <a href="/show.php?id={{ careplan.id }}">
+                    {{ careplan.type}}
                 </a>
             </td>
-            <td>{{ visit.notes }}
+            <td>{{ careplan.notes }}
             </td>
             <td class="visit-delete">
-                <form action='/visit_display.php?id="{{ visit.id}}" ' method="post">
-                    <input type="hidden" name="id" value="{{ visit.id }}">
+                <form action='/visit_display.php?id="{{ careplan.id}}" ' method="post">
+                    <input type="hidden" name="id" value="{{ careplan.id }}">
                     <input type="submit" name="submit" value="Delete">
                 </form>
 
             </td>
             <td class="visit-modify">
-                <form action='/visits_edit.php?id={{ visit.id}} ' method="post">
-                    <input type="hidden" name="id" value="{{ visit.id }}">
+                <form action='/visits_edit.php?id={{ careplan.id}} ' method="post">
+                    <input type="hidden" name="id" value="{{ careplan.id }}">
                     <input type="submit" name="submit" value="Edit">
                 </form>
             </td>
