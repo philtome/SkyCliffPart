@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    {#     {{ dump(visits) }} #}
+    <div class="jumbotron">
+        <div class="container">
+            <h1><?php echo strtoupper(strtolower($cleverWelcomeMessage)); ?></h1>
+
+            <p>Over <?php echo $visitCount ?>Care Plan Edit</p>
+            <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#visit-modal">Add Visit</button>
+            <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#visit-modal2">Add Visit2</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+
+        </div>
+    </div>
+    <!--<form method="post">-->
+    <table style="width:75%">
+        <tbody>
+        <tr>
+            <th>Visit Date</th>
+            <th>Visit Time</th>
+            <th>Type</th>
+            <th>Notes</th>
+        </tr>
+        {% for careplan in careplans %}
+        <tr>
+            <td>{{ careplan.visit_date }}
+            </td>
+            <td>{{ careplan.visit_time }}
+            </td>
+            <td>
+                <a href="/show.php?id={{ careplan.id }}">
+                    {{ careplan.type}}
+                </a>
+            </td>
+            <td>{{ careplan.notes }}
+            </td>
+            <td class="visit-delete">
+                <form action='/visit_display.php?id="{{ careplan.id}}" ' method="post">
+                    <input type="hidden" name="id" value="{{ careplan.id }}">
+                    <input type="submit" name="submit" value="Delete">
+                </form>
+
+            </td>
+            <td class="visit-modify">
+                <form action='/careplans_edit.php?id={{ careplan.id}} ' method="post">
+                    <input type="hidden" name="id" value="{{ careplan.id }}">
+                    <input type="submit" name="submit" value="Edit">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="recipient-name" placeholder="Name">
+                    <label for="recipient-name">Recipient:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block modal2 %}
+    <div class="modal fade" tabindex="-1" id="visit-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Visit Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save Visit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modal %}
+    <div class="modal fade" tabindex="-1" id="visit-modal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Visit2 Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Active2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Active3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Name">
+                        <label for="recipient-name">Recipient:</label>
+                    </div>
+
+
+
+                    <form>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="recipient-name" placeholder="Name">
+                            <label for="recipient-name">Recipient:</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" class="form-control" id="plan-date" placeholder="name">
+                            <label for="plan-date">Plan Date:</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text">Schedule:</label>
+                            <textarea class="form-control" id="plan-schedule"></textarea>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" class="form-control" id="plan-cpr" placeholder="name">
+                            <label for="plan-cpr">CPR:</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" class="form-control" id="plan-medical-status" placeholder="name">
+                            <label for="plan-medical-satus">Medical/Nutrition/Sensory/Medical/Pain Status:</label>
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save Visit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

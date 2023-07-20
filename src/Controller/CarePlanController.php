@@ -7,18 +7,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Loader\FilesystemLoader;
 
-class VisitController extends AbstractController
+class CarePlanController extends AbstractController
 {
     #[Route('/')]
     public function homepage () {
         return $this->render('main\home.twig', ['userName' => 'Philip Tome']);
     }
 
-    #[Route('/careplansVISIT')]
-    public function careplans (): Response
+    #[Route('/careplans/{slug}', name:'careplans', defaults: ['slug' => null])]
+    public function careplans ($slug): Response
     {
         require '../lib/functions.php';
-
         $carePlans = get_careplans(10);
 
         $carePlans = array_reverse($carePlans);
@@ -38,6 +37,15 @@ class VisitController extends AbstractController
             header('Location: /visit_display.php');
             die;
         }
+
+        if (is_null($slug)) {
+            return $this->render('careplans\careplans.twig', ['careplans' => $carePlans]);
+        }
+        else {
+            return $this->render('careplans\careplan_edit.twig', ['careplans' => $carePlans]);
+        }
+
+
         return $this->render('careplans\careplans.twig', ['careplans' => $carePlans]);
     }
 
@@ -52,9 +60,9 @@ class VisitController extends AbstractController
     }
 
     // note I need to figure out below: name and methods
-    #[Route('/individualContact/{slug}', name:'contacts.twig', defaults: ['slug' => null], methods: ['GET', 'HEAD'])]
-    public function individualContact ($slug): Response {
-        return new Response('This is the Individual Contacts plus slugs page, slug: '.$slug);
+    #[Route('/individualContact/{pug}', name:'contacts.twig', defaults: ['slug' => null], methods: ['GET', 'HEAD'])]
+    public function individualContact ($pug): Response {
+        return new Response('This is the Individual Contacts plus slugs page, slug: '.$pug);
     }
 
 }
