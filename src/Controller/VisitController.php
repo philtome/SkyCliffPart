@@ -9,10 +9,10 @@ use Twig\Loader\FilesystemLoader;
 
 class VisitController extends AbstractController
 {
-    #[Route('/')]
-    public function homepage () {
-        return $this->render('main\home.twig', ['userName' => 'Philip Tome']);
-    }
+//    #[Route('/')]
+//    public function homepage () {
+//        return $this->render('main\home.twig', ['userName' => 'Philip Tome']);
+//    }
 
     #[Route('/careplansVISIT')]
     public function careplans (): Response
